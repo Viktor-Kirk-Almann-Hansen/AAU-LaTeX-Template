@@ -1,0 +1,193 @@
+\chapter{Introduction} \label{ch:introduction}
+
+Welcome! This is the template I use when writing reports in \LaTeX.  
+Below you can find some key elements that are useful when writing.  
+
+All the text you write should go into the \texttt{.tex} files you see on the left.  
+In \texttt{master.tex} you can include new \texttt{.tex} files to be compiled into the PDF (take a look in that file to see how it works).  
+In \texttt{preamble.tex} you can add new packages for extra features and commands.  
+
+To see changes in the PDF, recompile by pressing the compile button or using \texttt{Ctrl+S}.  
+You can use the arrows between the editor and PDF to navigate to specific pages, and you can double-click inside the PDF to jump to where that part was written in the code.  
+
+---
+
+\section*{Comments}
+To comment something out (so it won’t show in the PDF), use:
+
+% This won't be in the PDF
+
+You can also use the \texttt{comment} environment:
+
+\begin{comment}
+    This also won't be in the PDF
+\end{comment}
+
+\section*{Line breaks}
+To go to the next line without starting a new paragraph, use:
+
+Line one \\
+Line two
+
+A double line break creates a new paragraph.
+
+\section*{Symbols}
+To write special characters, use a backslash in front of them:
+\% \& \# \_
+For a backslash itself, use: \textbackslash.
+
+\newpage
+\section*{Lists}
+You can create bullet lists with \texttt{itemize}:
+
+\begin{itemize}
+    \item First item
+    \item Second item
+\end{itemize}
+Or numbered lists with \texttt{enumerate}:
+
+\begin{enumerate}
+    \item First item
+    \item Second item
+\end{enumerate}
+You can also customize the numbering style:
+
+\begin{enumerate}[label=\alph*]
+    \item Item a
+    \item Item b
+\end{enumerate}
+
+
+\chapter*{Chapters and sections} \label{ch:placeholder}
+You can structure your document like this:
+
+\section*{New section} \label{sec:placeholder}
+Putting a \* after the section or chapter will not give a number and not add it to the table of contents (Which updates automatically).
+
+\subsection*{New subsection} \label{sec:sub_placeholder}
+
+\subsubsection{New subsubsection} \label{sec:subsub_placeholder}
+Note: subsubsection does not get a number by default.
+
+To force a page break use:
+\newpage
+
+
+
+\section*{Tables}
+Here is an example of a table:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cc}
+        \toprule
+        \textbf{Column 1} & \textbf{Column 2} \\
+        \midrule
+        1  & a \\
+        2  & b \\
+        3  & c \\
+        4  & d \\
+        5  & e \\
+        6  & f \\
+        \bottomrule
+    \end{tabular}
+    \caption{Caption for the table...}
+    \label{tab:placeholder}
+\end{table}
+There is so many ways to do it, you can look up online latex table editors/generators to customize them.
+
+\section*{Figures}
+
+To make a figure you can just copy a image with ctrl-c and paste it in with ctrl-v and the following will appear, you can also manually add them to the folder "figures/images" and then write the stuff below where you change the image name.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figures/images/pikachu.jpg}
+    \caption{Caption for the figure}
+    \label{fig:placeholder}
+\end{figure}
+
+\section*{Labels and references}
+It’s important to add labels to chapters, sections, figures, and tables so you can reference them later.
+
+Examples:
+
+See Figure \ref{fig:placeholder},  
+as shown in Table \ref{tab:placeholder},  
+or as explained in Chapter \ref{ch:conclusion}.
+In the PDF, you can click the reference numbers to jump to the corresponding place. Always make a reference to a figure, table, equation or what else you add.
+
+
+
+\section*{Math equations}
+
+You can write inline math like this: $E = mc^2$.  
+Or display math like this:
+\[
+    \int_0^1 x^2 \, dx = \frac{1}{3}
+\]
+Another way is to use the equation environment (you can add labels to this and reference to it):
+\begin{equation}
+    a^2 + b^2 = c^2
+\end{equation}
+
+Or:
+$$ a^2 + b^2 = c^2 $$
+
+
+
+\section*{Code snippets}
+
+To insert code, you can use the verbatim environment:
+\begin{verbatim}
+print("Hello, world!")
+for i in range(5):
+    print(i)
+\end{verbatim}
+
+Or with listings:
+\begin{lstlisting}[language=Python, caption=Example Python code]
+def hello():
+    print("Hello, LaTeX!")
+\end{lstlisting}
+
+There is many other ways to do it as well feel free to google.
+
+
+\section*{Glossary}
+
+The glossary entries are defined in the file \texttt{glossary.tex}.  
+You can reference them in the text with the command, \gls{latex}.  
+The corresponding explanation will appear in the glossary before the table of contents.  
+
+Acronyms can also be added. For instance, the acronym USB is defined in the glossary: the first use of \gls{usb} will produce the full form, while subsequent uses will display the short form. Using this convention makes the report more consistent and easier to read.
+
+
+\section*{Citations}
+
+To cite references, create a .bib file and add a entry.
+
+Then cite it in your text with \cite{lamport1994}. 
+
+
+A way smarter way to handle references/citations is to use the program Zotero. This is a fantastic tool that you have to install on you pc and add a browser extension for. Google this to learn it or ask me.
+
+
+\section*{Project Folder Structure}
+
+The project is organized into the following folders and files:
+
+\begin{itemize}
+    \item \textbf{.tex files}: Used for writing the main report content.
+    \item \textbf{appendix/}: Contains \texttt{.tex} files and any PDFs that should be included in the appendix.
+    \item \textbf{bib/}: Contains the bibliography files for references (I put my Zotero imported references.bib here).
+    \item \textbf{figures/AAUgraphics/}: Contains AAU logos and templates.
+    \item \textbf{figures/draw.io\_files/}: I use it to store my groups original diagram source files (created in draw.io), in case modifications are needed later.
+    \item \textbf{figures/images/}: Contains figures, images, diagrams etc.
+    \item \textbf{figures/signatures/}: Contains the groups signatures for the Preface.
+    \item \textbf{sections/}: Holds the \texttt{.tex} files for each report section. A common convention is to name them after the corresponding chapter number.
+    \item \textbf{setup/}: Controls how the PDF is compiled and which packages are loaded.
+    \item \textbf{master.tex}: The main file that assembles the entire report into a single PDF. 
+    It is important to set \texttt{master.tex} as the main document in your LaTeX editor to ensure the PDF compiles correctly.
+\end{itemize}
+

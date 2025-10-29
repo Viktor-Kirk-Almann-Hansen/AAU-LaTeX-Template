@@ -1,0 +1,344 @@
+%  A simple AAU report template.
+%  2015-05-08 v. 1.2.0
+%  Copyright 2010-2015 by Jesper Kjær Nielsen <jkn@es.aau.dk>
+%  Modified 2025 by Viktor Kirk Almann Hansen <vhanse23@student.aau.dk>
+%
+%  This is free software: you can redistribute it and/or modify
+%  it under the terms of the GNU General Public License as published by
+%  the Free Software Foundation, either version 3 of the License, or
+%  (at your option) any later version.
+%
+%  This is distributed in the hope that it will be useful,
+%  but WITHOUT ANY WARRANTY; without even the implied warranty of
+%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%  GNU General Public License for more details.
+%
+%  You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
+%
+\documentclass[11pt,a4paper,openright]{report}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Language, Encoding and Fonts
+% http://en.wikibooks.org/wiki/LaTeX/Internationalization
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Select encoding of your inputs. Depends on
+% your operating system and its default input
+% encoding. Typically, you should use
+%   Linux  : utf8 (most modern Linux distributions)
+%            latin1 
+%   Windows: ansinew
+%            latin1 (works in most cases)
+%   Mac    : applemac
+% Notice that you can manually change the input
+% encoding of your files by selecting "save as"
+% an select the desired input encoding. 
+
+% Make latex understand and use the typographic
+% rules of the language used in the document.
+\usepackage[australian]{babel}
+% Use the palatino font
+\usepackage[sc]{mathpazo}
+\linespread{1.2}         % Palatino needs more leading (space between lines)
+% Choose the font encoding
+\usepackage[T1]{fontenc}
+\usepackage{multirow}
+\usepackage{multicol}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Graphics and Tables
+% http://en.wikibooks.org/wiki/LaTeX/Importing_Graphics
+% http://en.wikibooks.org/wiki/LaTeX/Tables
+% http://en.wikibooks.org/wiki/LaTeX/Colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% load a colour package
+\usepackage{xcolor}
+\definecolor{aaublue}{RGB}{33,26,82}% dark blue
+% The standard graphics inclusion package
+\usepackage{graphicx}
+% Set up how figure and table captions are displayed
+\usepackage{caption}
+\captionsetup{%
+  font=footnotesize,% set font size to footnotesize
+  labelfont=bf % bold label (e.g., Figure 3.2) font
+}
+% Make the standard latex tables look so much better
+\usepackage{array,booktabs}
+% Enable the use of frames around, e.g., theorems
+% The framed package is used in the example environment
+\usepackage{framed}
+
+\usepackage{wrapfig}
+
+\usepackage{tabularx}
+
+\usepackage{listings}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour}, commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+\lstdefinestyle{mystyle2}{
+  commentstyle=\color{gray},          % Comments in gray
+  keywordstyle=\color{blue},         % Keywords in blue
+  stringstyle=\color{teal},          % Strings in teal
+  basicstyle=\ttfamily\footnotesize, % Monospaced font, smaller size
+  frame=lines,                       % Simple lines above and below
+  framesep=2mm,                      % Small space between frame and text
+  rulecolor=\color{black},           % Black frame lines
+  breaklines=true,                   % Enable line breaking
+  captionpos=b,                      % Captions below the code
+  keepspaces=true,                   % Preserve spaces in code
+  numbers=left,                      % Line numbers on the left
+  numbersep=10pt,                    % Space between line numbers and code
+  tabsize=2,                         % Tab width
+  showspaces=false,                  % Don't show spaces
+  showstringspaces=false,            % Don't show spaces in strings
+  showtabs=false,                    % Don't show tabs
+}
+
+
+\lstset{style=mystyle}
+
+\makeatletter
+\let\orig@lstnumber=\thelstnumber
+
+\newcommand\lstsetnumber[1]{\gdef\thelstnumber{#1}}
+\newcommand\lstresetnumber{\global\let\thelstnumber=\orig@lstnumber}
+\makeatother
+
+\usepackage{xcolor}
+\newcommand{\myRed}[1]{\textcolor{red}{#1}}
+\newcommand{\vc}[1]{\textcolor{orange}{#1}}
+
+\usepackage[acronym]{glossaries}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mathematics
+% http://en.wikibooks.org/wiki/LaTeX/Mathematics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Defines new environments such as equation,
+% align and split 
+\usepackage{amsmath}
+% Adds new math symbols
+\usepackage{amssymb}
+% Use theorems in your document
+% The ntheorem package is also used for the example environment
+% When using thmmarks, amsmath must be an option as well. Otherwise \eqref doesn't work anymore.
+\usepackage[framed,amsmath,thmmarks]{ntheorem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Page Layout
+% http://en.wikibooks.org/wiki/LaTeX/Page_Layout
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{eso-pic}
+% Change margins, papersize, etc of the document
+\usepackage[
+  inner=28mm,% left margin on an odd page
+  outer=28mm,% right margin on an odd page, default: 41
+  ]{geometry}
+% Modify how \chapter, \section, etc. look
+% The titlesec package is very configureable
+
+\usepackage{titlesec}
+\titleformat{\chapter}[hang]
+{\vspace{-7\baselineskip}\normalfont\huge\bfseries}
+{\fontsize{26}{30}\selectfont\thechapter.}
+{20pt}
+{\Huge}
+\titlespacing*{\chapter}{0pt}{45pt}{15pt}
+
+
+
+\titleformat*{\section}{\normalfont\Large\bfseries}
+\titleformat*{\subsection}{\normalfont\large\bfseries}
+\titleformat*{\subsubsection}{\normalfont\normalsize\bfseries}
+%\titleformat*{\paragraph}{\normalfont\normalsize\bfseries}
+%\titleformat*{\subparagraph}{\normalfont\normalsize\bfseries}
+
+% Clear empty pages between chapters
+
+
+% Change the headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} %delete everything
+\renewcommand{\headrulewidth}{0pt} %remove the horizontal line in the header
+\fancyhead[R]{\small\nouppercase\leftmark} %even page - chapter title
+\fancyhead[L]{\small\nouppercase\rightmark} %uneven page - section title
+\fancyfoot[C]{\thepage} % Page number centered in footer
+% Do not stretch the content of a page. Instead,
+% insert white space at the bottom of the page
+\raggedbottom
+% Enable arithmetics with length. Useful when
+% typesetting the layout.
+\usepackage{calc}
+\usepackage{tikz}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+% http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[
+  backend=biber,
+  bibencoding=utf8,
+  sorting=none,
+  style=numeric,
+  language=australian
+  ]{biblatex}
+\addbibresource{bib/references.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Misc
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Space instead of indent
+\usepackage[parfill]{parskip}
+
+\usepackage[skins,minted]{tcolorbox}
+
+
+
+\definecolor{mintedbackground}{rgb}{0.95,0.95,0.95}
+\definecolor{mintedframe}{rgb}{0.70,0.85,0.95}
+
+% This is the bash profile used throughout the document.
+% I've also got one for Python and console text (regular commands)
+\setminted[bash]{
+    bgcolor=white,
+    fontfamily=tt,
+    linenos=true,
+    numberblanklines=true,
+    numbersep=12pt,
+    numbersep=5pt,
+    gobble=0,
+    frame=leftline,
+    framesep=2mm,
+    funcnamehighlighting=true,
+    tabsize=4,
+    obeytabs=false,
+    mathescape=false
+    samepage=false,
+    showspaces=false,
+    showtabs =false,
+    texcl=false,
+    baselinestretch=1.2,
+    breaklines=true,
+}
+
+\newtcblisting{myminted}[2][]{enhanced, listing engine=minted, 
+listing only,#1, title=#2, minted language=bash, 
+coltitle=mintedbackground!30!black, 
+fonttitle=\ttfamily\footnotesize,
+sharp corners, top=0mm, bottom=0mm,
+title code={\path[draw=mintedframe,dashed, fill=mintedbackground](title.south west)--(title.south east);},
+frame code={\path[draw=mintedframe, fill=mintedbackground](frame.south west) rectangle (frame.north east);}
+}
+
+
+
+
+
+\setcounter{tocdepth}{2}
+% Add bibliography and index to the table of
+% contents
+\usepackage[nottoc]{tocbibind}
+% Add the command \pageref{LastPage} which refers to the
+% page number of the last page
+\usepackage{lastpage}
+% Add todo notes in the margin of the document
+\usepackage[
+%  disable, %turn off todonotes
+  colorinlistoftodos, %enable a coloured square in the list of todos
+  textwidth=\marginparwidth, %set the width of the todonotes
+  textsize=scriptsize, %size of the text in the todonotes
+  ]{todonotes}
+
+\usepackage{tabto} %Allows tab function.
+
+\usepackage{graphicx,subcaption,lipsum}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hyperlinks
+% http://en.wikibooks.org/wiki/LaTeX/Hyperlinks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Enable hyperlinks and insert info into the pdf
+% file. Hypperref should be loaded as one of the 
+% last packages
+\usepackage[pdfborder={0 0 0}]{hyperref}
+\hypersetup{%
+	plainpages=false,%
+	pdfauthor={Author(s)},%
+	pdftitle={Title},%
+	pdfsubject={Subject},%
+	bookmarksnumbered=true,%
+	colorlinks=false,%
+	citecolor=black,%
+	filecolor=black,%
+	linkcolor=black,% you should probably change this to black before printing
+	urlcolor=black,%
+	pdfstartview=FitH%
+}
+\makeglossaries
+
+
+\makeatletter
+\newcommand*{\centerfloat}{%
+  \parindent \z@
+  \leftskip \z@ \@plus 1fil \@minus \textwidth
+  \rightskip\leftskip
+  \parfillskip \z@skip}
+\makeatother
+
+
+\setcounter{tocdepth}{1} %shows the subsections in the ToC
+
+\usepackage{csquotes}
+\usepackage{datetime} % Til korrekt visning af tid og dato
+\usepackage{tablefootnote} % fordi latex er øv nogle gange
+\usepackage{threeparttable} % same
+\usepackage{makecell} % Add this line in your preamble
+\usepackage{enumitem}
+\newenvironment{bfenumerate}[1][]
+ {\begin{enumerate}[before=\bfseries,#1]}
+ {\end{enumerate}}
+\interfootnotelinepenalty=10000 % fix funky footnotes 
+
+\captionsetup{justification=centering}
+\usepackage{fancyvrb}
+
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0pt, parsep=0pt, itemsep=4pt}
+\setlist[enumerate]{topsep=0pt, parsep=0pt, itemsep=5pt}
+
+
+
+\usepackage{pgfkeys,pgfcalendar}
+\newcount\pgfdatecount
+\newcommand{\tomorrow}{%
+\pgfcalendardatetojulian{\year-\month-\day+1}{\pgfdatecount}
+\pgfcalendarjuliantodate{\the\pgfdatecount}{\myyear}{\mymonth}{\myday}
+\pgfcalendarmonthname{\mymonth}\space\myday,\space\myyear%
+}
+
+
+\usepackage{pdfpages}
+\usepackage[table]{xcolor} % For shading rows
+% Packages for writing
+\usepackage{enumitem}
+
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}

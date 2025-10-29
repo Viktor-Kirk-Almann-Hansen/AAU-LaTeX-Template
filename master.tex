@@ -1,0 +1,65 @@
+%  A simple AAU report template.
+%  2015-05-08 v. 1.2.0
+%  Copyright 2010-2015 by Jesper Kjær Nielsen <jkn@es.aau.dk>
+%  Modified 2025 by Viktor Kirk Almann Hansen <vhanse23@student.aau.dk>
+%
+%  This is free software: you can redistribute it and/or modify
+%  it under the terms of the GNU General Public License as published by
+%  the Free Software Foundation, either version 3 of the License, or
+%  (at your option) any later version.
+%
+%  This is distributed in the hope that it will be useful,
+%  but WITHOUT ANY WARRANTY; without even the implied warranty of
+%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%  GNU General Public License for more details.
+%
+%  You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
+%
+\input{setup/preamble.tex}% package inclusion and set up of the document
+\input{setup/hyphenations.tex}% 
+\input{setup/macros.tex}% my new macros 
+\setlength {\marginparwidth }{2cm}
+\begin{document}
+%frontmatter
+\pagestyle{empty} %disable headers and footers
+\pagenumbering{roman} %use roman page numbering in the frontmatter
+
+
+\input{sections/frontpage.tex}
+\input{sections/titlepages.tex}
+
+\glsresetall 
+
+\input{sections/glossary.tex}
+
+\pdfbookmark[0]{Contents}{label:contents}
+\pagestyle{fancy} %enable headers and footers again
+\tableofcontents
+\addtocontents{toc}{\protect\enlargethispage{\baselineskip}}
+\input{sections/preface.tex}
+\input{sections/colophon.tex}
+%\cleardoublepage
+
+
+
+% mainmatter
+\pagenumbering{arabic} %use arabic page numbering in the mainmatter
+\input{sections/1. introduction}
+\input{sections/2. problem}
+\input{sections/3. concept_specs}
+\input{sections/4. system_design}
+\input{sections/5. system_implementation}
+\input{sections/6. testing}
+\input{sections/7. discussion}
+\input{sections/8. conclusion}
+
+\printbibliography[heading=bibintoc, title=Bibliography]
+\label{bib:mybiblio}
+
+\appendix
+\includepdf[pages=-, pagecommand={\chapter{Project Proposal\label{app:proposal}}}]{appendix/project_proposal.pdf}
+\input{appendix/planning}
+\input{appendix/meeting_notes}
+
+\end{document} 
+%%%%%%%%%%%%%%%%%
